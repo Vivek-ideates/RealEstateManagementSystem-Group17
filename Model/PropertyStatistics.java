@@ -18,6 +18,5 @@ public class PropertyStatistics {
         this.minRent = minRent;
         this.maxRent = maxRent;
         this.averageRent = averageRent;
-        // occupancyRate is calculated here in step 2 (rented / total x 100, R7.2)
-    }
+        
 }
