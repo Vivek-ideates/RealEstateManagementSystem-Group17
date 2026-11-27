@@ -1,7 +1,8 @@
 package model;
 
-import java.util.date;
+import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Property {
     private final String propertyCode;
@@ -13,9 +14,9 @@ public class Property {
     private PropertyStatus status;
     private PropertyOwner owner;
     private final PropertyType type;
-    private date ownerSince;
+    private Date ownerSince;
     private final CityZone zone;
-    private List<RentalAgreement> agreements;
+    private List<RentalAgreement> agreements = new ArrayList<>();
 
     public property(String propertyCode, float area, int bedrooms, int bathrooms, float listedMonthlyRent, float salePrice, PropertyStatus status, PropertyOwner owner, PropertyType type, date ownerSince, CityZone zone, List<RentalAgreement> agreements) {
         this.propertyCode = propertyCode;
@@ -63,4 +64,51 @@ public class Property {
     public List<RentalAgreement> getAgreements() {
         return agreements;
     }
+
+    public setStatus(PropertyStatus status) {
+        this.status = status;
+    }
+
+    public transferOwnership(PropertyOwner newOwner, Date transferDate) {
+        this.owner = newOwner;
+        this.ownerSince = transferDate;
+    }
+
+    public addAgreement(RentalAgreement agreement) {
+        agreements.add(agreement);
+    }
+
+    public boolean isFreeBetween(Date startDate, Date endDate) {
+        RentalAgreement currentAgreement;
+        for (i = 0; i < agreements.size(); i++) {
+            currentAgreement = agreements.get(i);
+            if (currentAgreement.overlaps(startDate, endDate)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean matches(PropertyType type, String buildingCode, String zoneCode, int minBedrooms, float minArea, float maxArea, float minRent, float maxRent) {
+        if (this.type != type) {
+            return false;
+        }
+        if (this.buildingCode != buidlingCode) {
+            return false;
+        }
+        if (this.zone.getZoneCode() != zoneCode) {
+            return false;
+        }
+        if (this.bedrooms < minBedrooms) {
+            return false;
+        }
+        if (this.area < minArea || this.area > maxArea) {
+            return false;
+        }
+        if (this.listedMonthlyRent < minRent || this.listedMonthlyRent > maxRent) {
+            return false;
+        }
+        return true;
+    }
+
 }

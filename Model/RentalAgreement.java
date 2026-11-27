@@ -35,4 +35,18 @@ public class RentalAgreement extends Agreement {
         this.terminationDate = terminationDate;
     }
 
+    public boolean isActiveOn(Date date) {
+        return date.after(this.startDate) && date.before(this.endDate);
+    }
+
+    public boolean overlaps(Date startDate, Date endDate) {
+        if (startDate.before(this.startDate) && endDate.before(this.startDate)) {
+            return false;
+        } else if (startDate.after(this.endDate) && endDate(this.endDate)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }

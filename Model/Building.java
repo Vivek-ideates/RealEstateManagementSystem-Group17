@@ -36,4 +36,19 @@ public class Building {
     public List<Apartment> getApartments() {
         return apartments;
     }
+
+    public boolean isUnitNumberUnique(String unitNumber) {
+        Apartment currentApartment;
+        for (i = 0; i < apartments.size(); i++) {
+            currentApartment = apartments.get(i);
+            if (unitNumber == currentApartment.getUnitNumber()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public addApartment(Apartment apartment) {
+        apartments.add(apartment);
+    }
 }
