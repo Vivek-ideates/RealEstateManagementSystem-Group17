@@ -18,7 +18,7 @@ public class Property {
     private final CityZone zone;
     private List<RentalAgreement> agreements = new ArrayList<>();
 
-    public property(String propertyCode, float area, int bedrooms, int bathrooms, float listedMonthlyRent, float salePrice, PropertyStatus status, PropertyOwner owner, PropertyType type, date ownerSince, CityZone zone, List<RentalAgreement> agreements) {
+    public Property(String propertyCode, float area, int bedrooms, int bathrooms, float listedMonthlyRent, float salePrice, PropertyStatus status, PropertyOwner owner, PropertyType type, date ownerSince, CityZone zone) {
         this.propertyCode = propertyCode;
         this.area = area;
         this.bedrooms = bedrooms;
@@ -30,7 +30,6 @@ public class Property {
         this.type = type;
         this.ownerSince = ownerSince;
         this.zone = zone;
-        this.agreements = agreements;
     }
 
     public String getPropertyCode() {
@@ -78,6 +77,16 @@ public class Property {
         agreements.add(agreement);
     }
 
+    public RentalAgreement getActiveAgreement(Date date) {
+        RentalAgreement currentAgreement;
+        for (i =0; i < agreements.size(); i++) {
+            currentAgreement = apartments.get(i);
+            if (currentAgreement.isActiveOn(date)) {
+                return currentAgreement;
+            }
+        }
+    }
+
     public boolean isFreeBetween(Date startDate, Date endDate) {
         RentalAgreement currentAgreement;
         for (i = 0; i < agreements.size(); i++) {
@@ -89,11 +98,11 @@ public class Property {
         return true;
     }
 
-    public boolean matches(PropertyType type, String buildingCode, String zoneCode, int minBedrooms, float minArea, float maxArea, float minRent, float maxRent) {
+    public boolean matches(PropertyType type, String propertyCode, String zoneCode, int minBedrooms, float minArea, float maxArea, float minRent, float maxRent) {
         if (this.type != type) {
             return false;
         }
-        if (this.buildingCode != buidlingCode) {
+        if (this.propertyCode != propertyCode) {
             return false;
         }
         if (this.zone.getZoneCode() != zoneCode) {

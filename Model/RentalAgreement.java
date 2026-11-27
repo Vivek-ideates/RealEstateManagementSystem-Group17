@@ -9,7 +9,7 @@ public class RentalAgreement extends Agreement {
     private final float agreedMonthlyRent;
     private final Date terminationDate;
 
-    public rentalAgreement(String agreementCode, Property property, Tenant tenant, Date startDate, Date endDate, float agreedMonthlyRent, Date terminationDate) {
+    public RentalAgreement(String agreementCode, Property property, Tenant tenant, Date startDate, Date endDate, float agreedMonthlyRent, Date terminationDate) {
         super(agreementCode, property);
 
         this.tenant = tenant;
@@ -40,9 +40,11 @@ public class RentalAgreement extends Agreement {
     }
 
     public boolean overlaps(Date startDate, Date endDate) {
-        if (startDate.before(this.startDate) && endDate.before(this.startDate)) {
+        if (startDate.before(this.startDate) && endDate.after(this.startDate)) {
             return false;
-        } else if (startDate.after(this.endDate) && endDate(this.endDate)) {
+        } else if (startDate.before(this.endDate) && endDate.after(this.endDate)) {
+            return false;
+        } else if (startDate.after(this.startDate) && endDate.before(this.endDate)){
             return false;
         } else {
             return true;

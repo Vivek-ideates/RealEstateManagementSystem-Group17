@@ -6,7 +6,7 @@ import java.util.arrayList;
 public class Tenant extends Person {
     private List<RentalAgreement> agreements = new ArrayList<>();
 
-    public tenant(IndentificationType idType, String idNumber, String firstName, String lastName, String mailingAddress, String phoneNumber, PhoneType phoneType, String email, List<RentalAgreement> agreements) {
+    public Tenant(IndentificationType idType, String idNumber, String firstName, String lastName, String mailingAddress, String phoneNumber, PhoneType phoneType, String email, List<RentalAgreement> agreements) {
         super(idType, idNumber, firstName, lastName, mailingAddress, phoneNumber, phoneType, email);
 
         this.agreements = agreements;

@@ -4,7 +4,7 @@ public class Agreement {
     private final String agreementCode;
     private final Property property;
 
-    public agreement(String agreementCode, Property property) {
+    public Agreement(String agreementCode, Property property) {
         this.agreementCode = agreementCode;
         this.property = property;
     }

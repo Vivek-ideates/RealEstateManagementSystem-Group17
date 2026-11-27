@@ -6,7 +6,7 @@ public class CityZone {
     private float referencerRentPerSqm;
     private float commissionPercentage;
 
-    public cityZone(String zoneCode, String name, float referenceRentPerSqm, float commissionPercentage) {
+    public CityZone(String zoneCode, String name, float referenceRentPerSqm, float commissionPercentage) {
         this.zoneCode = zoneCode;
         this.name = name;
         this.referencerRentPerSqm = referenceRentPerSqm;
